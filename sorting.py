@@ -7,7 +7,7 @@ import random
 def random_list(amount=50, rnge=(0, 10)):
     # This function provides a set of random numbers
     numbers = []
-    for i in range(amount):
+    for k in range(amount):
         numbers.append(random.randrange(rnge[0], rnge[1]))
     return numbers
 
@@ -47,12 +47,37 @@ def merge(arrays):
     return new_arrs
 
 
+def predict(numbs):
+    # This function predicts max amount of executions
+    if len(numbs) > 0:
+        highest = 0
+        lowest = 0
+        for num in numbs:
+            if highest < num:
+                highest = num
+            if lowest > num:
+                lowest = num
+                
+        num_range = highest-lowest
+        if num_range > 0:
+            factor = 1
+            while 2**factor < num_range:
+                factor += 1
+            return factor
+
+        else:
+            return 1
+
+    else:
+        return 'Error, can\'t calculate for 0'
+
+
 if __name__ == "__main__":
-    rl = [random_list(amount=100000, rnge=(0, 10000))]
-    print(rl)
+    rl = [random_list(amount=10000, rnge=(0, 32))]
+    print('Raw numbers: ', rl)
+    print('Max amount of loops: ', predict(rl[0]))
 
     i = 0
-
     while not is_sorted(merge(rl)):
         i += 1
 
@@ -61,9 +86,31 @@ if __name__ == "__main__":
             for n in do_calculations(nums):
                 new_rl.append(n)
         rl = new_rl
-        print(f'Amount of shells: {len(rl)}')
-        if is_sorted(merge(rl)):
-            print('Break')
+        print('Amount of shells: ', len(rl))
 
-    print(f'Amount of loops done: {i}')
-    print(merge(rl))
+    print('----------------------------------------')
+    print('Amount of loops done: ', i)
+    print('Unmerged: ', rl)
+    print('Merged: ', merge(rl))
+    print('----------------------------------------')
+
+'''
+The amount of loops required to be done is highly dependent on the range of numbers
+For example, for our x amount of numbers, that have lowest number of 5 and highest of 37, we can subtract
+5 from 37, so we have 32. So to calculate the amount of loops, we'll execute we have to find it's higher or equal
+power of 2. 
+
+
+ - So for 32(37-5):
+2**5 = 32. So we'll execute the loop 5 times or less. It's gonna be more precise if amount of numbers will be
+higher or lower.
+
+ - Another example, 70(80-10):
+2**6 = 64, but 64 is less than 70. The number has to be equal to or smaller than the factor of 2.
+So 2**7 = 128. And 7 is the amount of max required executions of the loop.
+
+
+There are some exceptions, for small amount of numbers, there might appear some bugs, but for bigger, like 10'000 or
+100'000 there are none(almost)
+For example (amount=100, rnge=(0, 32))
+'''
