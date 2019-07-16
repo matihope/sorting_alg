@@ -1,11 +1,11 @@
 # For fun mini-project
 # Mateusz Kolpa
 # 2019-07-16
-import math
 import random
 
 
-def random_list(amount=5, rnge=(0, 5)):
+def random_list(amount=50, rnge=(0, 10)):
+    # This function provides a set of random numbers
     numbers = []
     for i in range(amount):
         numbers.append(random.randrange(rnge[0], rnge[1]))
@@ -13,6 +13,7 @@ def random_list(amount=5, rnge=(0, 5)):
 
 
 def is_sorted(numbers):
+    # Function that checks if numbers in given array are sorted
     for j in range(len(numbers)):
         if numbers[j] > numbers[min(j+1, len(numbers)-1)]:
             # If number in array lower is bigger than one higher, then return False
@@ -21,6 +22,7 @@ def is_sorted(numbers):
 
 
 def do_calculations(lst):
+    # This function makes new arrays
     if is_sorted(lst):
         return [lst]
 
@@ -36,11 +38,8 @@ def do_calculations(lst):
     return [lst1, lst2]
 
 
-def abd():
-    pass
-
-
-def make_one_array(arrays):
+def merge(arrays):
+    # This function merges the whole array of arrays to one single array
     new_arrs = []
     for a in arrays:
         for b in a:
@@ -49,20 +48,22 @@ def make_one_array(arrays):
 
 
 if __name__ == "__main__":
-    rl = [random_list(amount=5000, rnge=(0, 100))]
+    rl = [random_list(amount=100000, rnge=(0, 10000))]
     print(rl)
 
-    for s in range(math.ceil(math.sqrt(len(rl[0])))):
-        # For ex. [10, 5, 3, 5, 7, 1, 5, 2, 8, 3] -> len = 10
-        # Then with 10 sqrt = 3.16
-        # Then ceil(3.16) = 4
-        # So the loop will be executed 4 times
+    i = 0
+
+    while not is_sorted(merge(rl)):
+        i += 1
 
         new_rl = []
         for nums in rl:
             for n in do_calculations(nums):
                 new_rl.append(n)
         rl = new_rl
+        print(f'Amount of shells: {len(rl)}')
+        if is_sorted(merge(rl)):
+            print('Break')
 
-    rl = make_one_array(rl)
-    print(rl)
+    print(f'Amount of loops done: {i}')
+    print(merge(rl))
