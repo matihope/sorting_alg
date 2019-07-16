@@ -1,7 +1,6 @@
 # For fun mini-project
 # Mateusz Kolpa
 # 2019-07-16
-
 import math
 import random
 
