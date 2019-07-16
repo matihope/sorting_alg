@@ -12,9 +12,9 @@ def random_list(amount=5, rnge=(0, 5)):
     return numbers
 
 
-def sorted(numbers):
-    for i in range(len(numbers)):
-        if numbers[i] > numbers[min(i+1, len(numbers)-1)]:
+def is_sorted(numbers):
+    for j in range(len(numbers)):
+        if numbers[j] > numbers[min(j+1, len(numbers)-1)]:
             # If number in array lower is bigger than one higher, then return False
             return False
     return True
@@ -24,7 +24,7 @@ def do_calculations(lst):
     lst1 = []
     lst2 = []
     # if not sorted(lst) or len(lst) > 1:
-    if sorted(lst):
+    if is_sorted(lst):
         return [lst]
     else:
         avg = sum(lst) / len(lst)
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     rl = [random_list(amount=5000, rnge=(0, 100))]
     print(rl)
 
-    for i in range(math.ceil(math.sqrt(len(rl[0])))):
+    for s in range(math.ceil(math.sqrt(len(rl[0])))):
         # For ex. [10, 5, 3, 5, 7, 1, 5, 2, 8, 3] -> len = 10
         # Then with 10 sqrt = 3.16
         # Then ceil(3.16) = 4
