@@ -33,9 +33,11 @@ def do_calculations(lst):
             lst1.append(num)
         else:
             lst2.append(num)
-    return [lst1, lst2]asdfasdfasdfasdfasdf
-    asdfasdf
+    return [lst1, lst2]
 
+
+def abd():
+    pass
 
 
 def make_one_array(arrays):
