@@ -21,27 +21,28 @@ def is_sorted(numbers):
 
 
 def do_calculations(lst):
-    lst1 = []
-    lst2 = []
-    # if not sorted(lst) or len(lst) > 1:
     if is_sorted(lst):
         return [lst]
-    else:
-        avg = sum(lst) / len(lst)
 
-        for num in lst:
-            if num < avg:
-                lst1.append(num)
-            else:
-                lst2.append(num)
-        return [lst1, lst2]
+    lst1 = []
+    lst2 = []
+    avg = sum(lst) / len(lst)
+
+    for num in lst:
+        if num < avg:
+            lst1.append(num)
+        else:
+            lst2.append(num)
+    return [lst1, lst2]asdfasdfasdfasdfasdf
+    asdfasdf
+
 
 
 def make_one_array(arrays):
     new_arrs = []
-    for arr in arrays:
-        for a in arr:
-            new_arrs.append(a)
+    for a in arrays:
+        for b in a:
+            new_arrs.append(b)
     return new_arrs
 
 
